@@ -9,6 +9,7 @@ import { MaterialModule } from './material.module';
 import { PractionerComponent } from './practioner/practioner.component';
 import { NewPractionerComponent } from './practioner/new-practioner/new-practioner.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

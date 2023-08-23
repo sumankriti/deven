@@ -1,22 +1,21 @@
 <mat-card>
     <mat-card-content>
+      <form class="section" [formGroup]="practionerForm">
+        <div formGroupName="practioner">
         <div class="row">
             <div class="col-md-6"> 
-                <mat-checkbox color="primary">Disabled</mat-checkbox></div>
+                <mat-checkbox color="primary" formControlName="disabled">Disabled</mat-checkbox></div>
             <div class="col-md-6" >
-                <mat-checkbox color="primary">Allow Video Conferencing</mat-checkbox>
+                <mat-checkbox color="primary" formControlName="videoConferencing">Allow Video Conferencing</mat-checkbox>
             </div>
         </div>
         <hr/>
-       
-        <form class="section" [formGroup]="practionerForm">
-          <div formGroupName="practioner">
             <div class="row">
               <div class="col-md-6">
                   <h2>Schedule details</h2>
               </div>
               <div class="col-md-6">
-                  <button type="submit" mat-raised-button color="warn" [disabled]="!practionerForm.valid" (click)="onSubmit()">Save Schedule</button>
+                  <button type="submit" mat-raised-button color="primary" [disabled]="!practionerForm.valid" (click)="onSubmit()">Save Schedule</button>
               </div>
           </div>
         
@@ -24,6 +23,7 @@
             <mat-form-field appearance="outline">
                 <mat-label>Schedule Name</mat-label>
                 <input matInput formControlName="scheduleName">
+                <mat-error *ngIf="practionerForm.get('practioner.scheduleName')?.hasError('required')">Please Provide Schedule name</mat-error>
               </mat-form-field>
          </div>
      
@@ -38,6 +38,27 @@
               <button mat-raised-button color="warn" (click)="removeSelectedRows()">Remove Selected Days</button>
           </div>
       </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <mat-form-field appearance="outline">
+            <mat-label>Select Days</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let day of days" [value]="day.value">
+                {{day.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <ngx-timepicker-field [defaultTime]="'11:11 am'"></ngx-timepicker-field>
+        </div>
+        <div class="col-md-3">
+          <ngx-timepicker-field [defaultTime]="'08:11 pm'"></ngx-timepicker-field>
+        </div>
+        <div class="col-md-3">col 4</div>
+      </div>
+
       <div>
         <br/>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -88,4 +109,6 @@
         </form>
     </mat-card-content>
   </mat-card>
+
+
   

@@ -38,13 +38,25 @@ export class NewPractionerComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<TimeSlot>(ELEMENT_DATA);
   selection = new SelectionModel<TimeSlot>(true, []);
 
+  days = [
+    {value:'sunday',viewValue:'Sunday'},
+    {value:'monday',viewValue:'Monday'},
+    {value:'tuesday',viewValue:'Tuesday'},
+    {value:'wednesday',viewValue:'Wednesday'},
+    {value:'thursday',viewValue:'Thursday'},
+    {value:'friday',viewValue:'Friday'},
+    {value:'satuarday',viewValue:'Satuarday'}
+  ]
+
   constructor(private _cd:ChangeDetectorRef){
   }
 
    ngOnInit(): void {
      this.practionerForm = new FormGroup({
       practioner: new FormGroup({
-        scheduleName: new FormControl('',Validators.required)
+        scheduleName: new FormControl('',Validators.required),
+        disabled: new FormControl(''),
+        videoConferencing: new FormControl('')
       })
      })
    }
@@ -78,11 +90,11 @@ export class NewPractionerComponent implements OnInit, AfterViewInit {
  }
  
  getScheduleNameError(){
-   return 'You must enter the schedule name';
+   return this.practionerForm.controls['practioner'];
  }
  
 
  onSubmit(){
-    console.log(this.practionerForm);
+    console.log(this.practionerForm.value);
  }
 }
